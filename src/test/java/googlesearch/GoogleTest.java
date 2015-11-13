@@ -10,13 +10,15 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import static googlesearch.CustomConditions.listNthElementHasText;
 import static googlesearch.CustomConditions.sizeOf;
-import static googlesearch.Tools.*;
+import static googlesearch.Tools.by;
+import static googlesearch.Tools.get;
+import static googlesearch.Tools.hold;
 import static junit.framework.Assert.assertTrue;
 
 public class GoogleTest {
 
     public static WebDriver driver = new FirefoxDriver();
-    By results = By.cssSelector(".srg>.g");
+    By results = by(".srg>.g");
 
     @BeforeClass
     public static void openPage() {

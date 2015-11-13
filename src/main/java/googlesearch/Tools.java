@@ -7,9 +7,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static googlesearch.CustomConditions.minimumSizeOf;
 
-/**
- * Created by oksana on 11/12/15.
- */
 public class Tools {
 
     public static WebDriver driver;
