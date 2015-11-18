@@ -28,7 +28,7 @@ public class GoogleTest {
     }
 
     @Test
-    public void testGoogleSearch() {
+     public void testGoogleSearch() {
         search("selenium");
         hold().until(listNthElementHasText(results, 0, "Selenium - Web Browser Automation"));
         hold().until(sizeOf(results, 10));
