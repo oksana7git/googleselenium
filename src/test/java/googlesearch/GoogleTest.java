@@ -14,8 +14,6 @@ import static junit.framework.Assert.assertTrue;
 
 public class GoogleTest {
 
-    By results = by(".srg>.g");
-
     @BeforeClass
     public static void openPage() {
         setWebDriver(new FirefoxDriver());
@@ -28,7 +26,7 @@ public class GoogleTest {
         hold().until(listNthElementHasText(results, 0, "Selenium - Web Browser Automation"));
         hold().until(sizeOf(results, 10));
         followResultLink(0);
-        assertTrue(getPageTitle().contains("Selenium - Web Browser Automation"));
+        assertTrue(getTitle().contains("Selenium - Web Browser Automation"));
     }
 
     @AfterClass
@@ -36,8 +34,10 @@ public class GoogleTest {
         getWebDriver().quit();
     }
 
+    By results = by(".srg>.g");
+
     public static void search(String text) {
-        getElement(By.name("q")).sendKeys(text + Keys.ENTER);
+        find(By.name("q")).sendKeys(text + Keys.ENTER);
     }
 
     public void followResultLink(int i) {

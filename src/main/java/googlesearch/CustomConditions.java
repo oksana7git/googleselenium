@@ -25,13 +25,13 @@ public class CustomConditions {
     }
 
     public static ExpectedCondition<Boolean> listNthElementHasText(
-            final By results, final int nth, final String expectedText) {
+            final By elementsLocator, final int nth, final String expectedText) {
         return new ExpectedCondition<Boolean>() {
             private String actualText = "";
 
             public Boolean apply(WebDriver driver) {
                 try {
-                    actualText = driver.findElements(results).get(nth).getText();
+                    actualText = driver.findElements(elementsLocator).get(nth).getText();
                     return actualText.contains(expectedText);
                 } catch (IndexOutOfBoundsException e) {
                     return false;
@@ -41,21 +41,29 @@ public class CustomConditions {
             public String toString() {
                 return String.format(
                         "\ntext: %s \n to be present in %sth element\n of list: %s\n while actual text: %s",
-                        expectedText, nth, results, actualText);
+                        expectedText, nth, elementsLocator, actualText);
             }
         };
     }
 
     public static ExpectedCondition<List<WebElement>> minimumSizeOf(final By elementsLocator, final int expectedMinimumSize) {
         return new ExpectedCondition<List<WebElement>>() {
+            private int actualSize = 0;
 
-        public List<WebElement> apply(WebDriver driver) {
+            public List<WebElement> apply(WebDriver driver) {
                 List<WebElement> elements = driver.findElements(elementsLocator);
-                if (elements.size() >= expectedMinimumSize) {
+                actualSize = elements.size();
+                if (actualSize >= expectedMinimumSize) {
                     return elements;
                 } else {
                     return null;
                 }
+            }
+
+            public String toString() {
+                return String.format(
+                        "\nsize of list: %s \n to be: %s\n while actual size: %s",
+                        expectedMinimumSize, elementsLocator, actualSize);
             }
         };
     }

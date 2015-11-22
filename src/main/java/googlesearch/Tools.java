@@ -15,6 +15,7 @@ public class Tools {
 
     public static void setWebDriver(WebDriver driver) {
         Tools.driver = driver;
+        driver.manage().window().maximize();
     }
 
     public static WebDriver getWebDriver() {
@@ -23,7 +24,6 @@ public class Tools {
 
     public static void open(String link) {
         driver.get(link);
-        driver.manage().window().maximize();
     }
 
     public static WebDriverWait hold(){
@@ -38,11 +38,11 @@ public class Tools {
         return hold().until(minimumSizeOf(elements, index + 1)).get(index);
     }
 
-    public static WebElement getElement(By locator) {
+    public static WebElement find(By locator) {
         return driver.findElement(locator);
     }
 
-    public static String getPageTitle() {
+    public static String getTitle() {
         return driver.getTitle();
     }
 }
