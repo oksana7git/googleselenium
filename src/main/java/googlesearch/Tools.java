@@ -1,7 +1,6 @@
 package googlesearch;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -35,16 +34,12 @@ public class Tools {
         return By.cssSelector(cssSelector);
     }
 
-    public static void search(String text) {
-        driver.findElement(By.name("q")).sendKeys(text + Keys.ENTER);
-    }
-
     public static WebElement get(By elements, int index) {
         return hold().until(minimumSizeOf(elements, index + 1)).get(index);
     }
 
-    public static void followResultLink(int i, By results) {
-        get(results, i).findElement(by(".r a")).click();
+    public static WebElement getElement(By locator) {
+        return driver.findElement(locator);
     }
 
     public static String getPageTitle() {

@@ -4,6 +4,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import static googlesearch.CustomConditions.listNthElementHasText;
@@ -26,12 +27,20 @@ public class GoogleTest {
         search("selenium");
         hold().until(listNthElementHasText(results, 0, "Selenium - Web Browser Automation"));
         hold().until(sizeOf(results, 10));
-        followResultLink(0, results);
+        followResultLink(0);
         assertTrue(getPageTitle().contains("Selenium - Web Browser Automation"));
     }
 
     @AfterClass
     public static void tearDown() {
         getWebDriver().quit();
+    }
+
+    public static void search(String text) {
+        getElement(By.name("q")).sendKeys(text + Keys.ENTER);
+    }
+
+    public void followResultLink(int i) {
+        get(results, i).findElement(by(".r a")).click();
     }
 }
